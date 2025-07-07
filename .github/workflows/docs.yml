@@ -39,19 +39,35 @@ jobs:
 
       - name: Generate documentation.json
         run: |
+          set -x  # print each command as it runs
+    
           mkdir -p proto
-          
+    
+          echo "Looking for .proto files in ./proto"
+          find ./proto -name "*.proto"
+      
           PROTO_FILES=$(find ./proto -name "*.proto")
-
+      
           if [ -z "$PROTO_FILES" ]; then
-            echo "No .proto files found. Skipping documentation generation."
-            exit 0
+            echo "No .proto files found."
+            exit 1
           fi
-
+      
+          echo "Generating documentation..."
           protoc \
-          --proto_path=./proto \
-          --doc_out=json,./proto/documentation.json:. \
-          $PROTO_FILES
+            --proto_path=./proto \
+            --doc_out=json,./proto/documentation.json:. \
+            $PROTO_FILES
+      
+          echo "Resulting files in ./proto:"
+          ls -lh ./proto
+      
+          echo "Contents of documentation.json (if exists):"
+          if [ -f ./proto/documentation.json ]; then
+            head -n 20 ./proto/documentation.json
+          else
+            echo "documentation.json was not created."
+          fi
 
       - name: Check for changes
         id: git-diff
