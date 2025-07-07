@@ -71,7 +71,7 @@ jobs:
         if: steps.git-diff.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
           commit-message: "chore: update generated documentation.json"
           branch: update/proto-docs-${{ github.run_id }}
           title: "[docs][auto] Update proto docs after merge of PR #${{ github.event.pull_request.number }}"
