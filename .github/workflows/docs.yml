@@ -50,8 +50,8 @@ jobs:
           fi
 
           protoc \
-          --proto_path=./proto \
-          --doc_out=json,./proto/documentation.json:. \
+          --proto_path=proto \
+          --doc_out=json,proto/documentation.json:. \
           $PROTO_FILES
 
       - name: Check for changes
