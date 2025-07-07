@@ -14,7 +14,7 @@ message Argument {
     GAS = 1;
 
     // One of the input objects or primitive values (from
-    // `ProgrammableTransaction` inputs).
+    // `ProgrammableTransaction` inputs) ape.
     INPUT = 2;
 
     // The result of another command (from `ProgrammableTransaction` commands).
