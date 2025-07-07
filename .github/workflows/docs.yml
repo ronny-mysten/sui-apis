@@ -40,36 +40,20 @@ jobs:
 
       - name: Generate documentation.json
         run: |
-          set -x  # print each command as it runs
-      
-          mkdir -p proto
-      
-          echo "Looking for .proto files in ./proto"
-          find ./proto -name "*.proto"
+          export PATH="$HOME/go/bin:$PATH"
+          which protoc-gen-doc || echo "protoc-gen-doc not found"
+          ls -lh $HOME/go/bin/protoc-gen-doc
       
           PROTO_FILES=$(find ./proto -name "*.proto")
+          echo "$PROTO_FILES"
       
-          if [ -z "$PROTO_FILES" ]; then
-            echo "No .proto files found."
-            exit 1
-          fi
-      
-          echo "Generating documentation..."
           protoc \
-
-          --proto_path=proto \
-          --doc_out=json,proto/documentation.json:. \
-          $PROTO_FILES
+            --plugin=protoc-gen-doc=$HOME/go/bin/protoc-gen-doc \
+            --proto_path=./proto \
+            --doc_out=json,./proto/documentation.json:. \
+            $PROTO_FILES
       
-          echo "Resulting files in ./proto:"
           ls -lh ./proto
-      
-          echo "Contents of documentation.json (if exists):"
-          if [ -f ./proto/documentation.json ]; then
-            head -n 20 ./proto/documentation.json
-          else
-            echo "documentation.json was not created."
-          fi
 
       - name: Check for changes
         id: git-diff
