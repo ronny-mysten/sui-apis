@@ -36,6 +36,7 @@ jobs:
         run: |
           go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
+          export PATH="$HOME/go/bin:$PATH"
 
       - name: Generate documentation.json
         run: |
