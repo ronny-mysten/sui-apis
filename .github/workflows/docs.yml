@@ -56,9 +56,10 @@ jobs:
       
           echo "Generating documentation..."
           protoc \
-            --proto_path=./proto \
-            --doc_out=json,./proto/documentation.json:. \
-            $PROTO_FILES
+
+          --proto_path=proto \
+          --doc_out=json,proto/documentation.json:. \
+          $PROTO_FILES
       
           echo "Resulting files in ./proto:"
           ls -lh ./proto
