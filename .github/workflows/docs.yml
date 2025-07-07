@@ -43,6 +43,11 @@ jobs:
           
           PROTO_FILES=$(find ./proto -name "*.proto")
 
+          if [ -z "$PROTO_FILES" ]; then
+            echo "No .proto files found. Skipping documentation generation."
+            exit 0
+          fi
+
           protoc \
           --proto_path=./proto \
           --doc_out=json,./proto/documentation.json:. \
