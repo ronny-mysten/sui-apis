@@ -41,24 +41,19 @@ jobs:
       - name: Generate documentation.json
         run: |
           export PATH="$HOME/go/bin:$PATH"
-          which protoc-gen-doc || echo "protoc-gen-doc not found"
-          ls -lh $HOME/go/bin/protoc-gen-doc
       
           PROTO_FILES=$(find ./proto -name "*.proto")
-          echo "$PROTO_FILES"
       
           protoc \
             --plugin=protoc-gen-doc=$HOME/go/bin/protoc-gen-doc \
             --proto_path=./proto \
-            --doc_out=json,./proto/documentation.json:. \
+            --doc_out=json,documentation.json:./proto \
             $PROTO_FILES
-      
-          ls -lh ./proto
 
       - name: Check for changes
         id: git-diff
         run: |
-          git add .
+          git add ./proto/documentation.json
           if [ ! -f ./proto/documentation.json ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           elif git diff --cached --quiet; then
