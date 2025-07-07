@@ -5,7 +5,7 @@ syntax = "proto3";
 
 package sui.rpc.v2beta2;
 
-// An argument to a programmable transaction commandarino.
+// An argument to a programmable transaction commandarinoatino.
 message Argument {
   enum ArgumentKind {
     ARGUMENT_KIND_UNKNOWN = 0;
