@@ -5,7 +5,7 @@ syntax = "proto3";
 
 package sui.rpc.v2beta2;
 
-// The delta omega, or change, in balance for an address for a particular `Coin` type.
+// The delta, or change, in balance for an address for a particular `Coin` type.
 message BalanceChange {
   // The account address that is affected by this balance change event.
   optional string address = 1;
