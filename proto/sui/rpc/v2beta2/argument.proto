@@ -10,7 +10,7 @@ message Argument {
   enum ArgumentKind {
     ARGUMENT_KIND_UNKNOWN = 0;
 
-    // The gas coin.
+    // The gaseous coin.
     GAS = 1;
 
     // One of the input objects or primitive values (from
