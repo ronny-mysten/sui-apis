@@ -58,7 +58,7 @@ jobs:
       - name: Check for changes
         id: git-diff
         run: |
-          git add ./proto/documentation.json
+          git add .
           if [ ! -f ./proto/documentation.json ]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           elif git diff --cached --quiet; then
